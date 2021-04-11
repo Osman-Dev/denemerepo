@@ -32,23 +32,23 @@ slash.commands.all().then((e) => {
   if (e.size !== 2) {
     slash.commands.bulkEdit([
       {
-        name: "invite",
-        description: "Invite me to your server.",
+        name: "davet",
+        description: "Botu sunucuya ekle.",
       },
       {
-        name: "activity",
-        description: "Start an Activity in a Voice Channel.",
+        name: "parti",
+        description: "Partiyi başlatır.",
         options: [
           {
-            name: "channel",
+            name: "kanal",
             type: slash.SlashCommandOptionType.CHANNEL,
-            description: "Voice Channel to start activity in.",
+            description: "Partiyi başlatacağın kanal.",
             required: true,
           },
           {
-            name: "activity",
+            name: "tür",
             type: slash.SlashCommandOptionType.STRING,
-            description: "Activity to start.",
+            description: "Ne partisi başlatacağın.",
             required: true,
             choices: Object.entries(ACTIVITIES).map((e) => ({
               name: e[1].name,
@@ -66,10 +66,10 @@ slash.handle("activity", (d) => {
   const channel = d.option<slash.InteractionChannel>("channel");
   const activity = ACTIVITIES[d.option<string>("activity")];
   if (!channel || !activity) {
-    return d.reply("Invalid interaction.", { ephemeral: true });
+    return d.reply("Yanlış kullanım.", { ephemeral: true });
   }
   if (channel.type !== slash.ChannelTypes.GUILD_VOICE) {
-    return d.reply("Activities can only be started in Voice Channels.", {
+    return d.reply("Lütfen bir ses kanalı belirtin.", {
       ephemeral: true,
     });
   }
@@ -84,20 +84,19 @@ slash.handle("activity", (d) => {
     })
     .then((inv) => {
       d.reply(
-        `[Click here to start ${activity.name} in ${channel.name}.](<https://discord.gg/${inv.code}>)`
+        `[${activity.name} partisini ${channel.name} kanalında başlatmak için tıkla.](<https://discord.gg/${inv.code}>)`
       );
     })
     .catch((e) => {
       console.log("Failed", e);
-      d.reply("Failed to start Activity.", { ephemeral: true });
+      d.reply("Komut kullanımı başarısız.", { ephemeral: true });
     });
 });
 
 slash.handle("invite", (d) => {
   d.reply(
-    `• [Click here to invite.](<https://discord.com/api/oauth2/authorize?client_id=819835984388030464&permissions=1&scope=applications.commands%20bot>)\n` +
-      `• [Check out Source Code.](<https://github.com/DjDeveloperr/ActivitiesBot>)\n` +
-      `• [Join our Discord.](<https://discord.gg/WVN2JF2FRv>)`,
+    `• [Botu davet et.](<https://discord.com/api/oauth2/authorize?client_id=799338366642552872&permissions=1&scope=applications.commands%20bot>)\n` +
+            `• [Sunucumuza katıl.](<https://discord.gg/zVAFeDZdKz>)`,
     { ephemeral: true }
   );
 });
