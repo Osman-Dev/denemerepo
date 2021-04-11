@@ -33,7 +33,7 @@ slash.commands.all().then((e) => {
     slash.commands.bulkEdit([
       {
         name: "davet",
-        description: "Invite me to your server.",
+        description: "Sunucuna botu davet et.",
       },
       {
         name: "activity",
