@@ -48,7 +48,7 @@ slash.commands.all().then((e) => {
           {
             name: "activity",
             type: slash.SlashCommandOptionType.STRING,
-            description: "Activity to start.",
+            description: "Activity to startnn.",
             required: true,
             choices: Object.entries(ACTIVITIES).map((e) => ({
               name: e[1].name,
@@ -66,10 +66,10 @@ slash.handle("activity", (d) => {
   const channel = d.option<slash.InteractionChannel>("channel");
   const activity = ACTIVITIES[d.option<string>("activity")];
   if (!channel || !activity) {
-    return d.reply("Invalid interaction.", { ephemeral: true });
+    return d.reply("Yanlış kullanım.", { ephemeral: true });
   }
   if (channel.type !== slash.ChannelTypes.GUILD_VOICE) {
-    return d.reply("Activities can only be started in Voice Channels.", {
+    return d.reply("Sadece ses kanalında parti başlatabilirsin.", {
       ephemeral: true,
     });
   }
@@ -89,7 +89,7 @@ slash.handle("activity", (d) => {
     })
     .catch((e) => {
       console.log("Failed", e);
-      d.reply("Failed to start Activity.", { ephemeral: true });
+      d.reply("Komut kullanılamadı.", { ephemeral: true });
     });
 });
 
