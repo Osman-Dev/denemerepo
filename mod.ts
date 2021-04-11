@@ -32,7 +32,7 @@ slash.commands.all().then((e) => {
   if (e.size !== 2) {
     slash.commands.bulkEdit([
       {
-        name: "invite",
+        name: "davet",
         description: "Invite me to your server.",
       },
       {
