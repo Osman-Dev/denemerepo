@@ -32,23 +32,23 @@ slash.commands.all().then((e) => {
   if (e.size !== 2) {
     slash.commands.bulkEdit([
       {
-        name: "davet",
-        description: "Botu sunucuya ekle.",
+        name: "invite",
+        description: "Invite me to your server.",
       },
       {
-        name: "parti",
-        description: "Partiyi başlatır.",
+        name: "activity",
+        description: "Parti Baslat!",
         options: [
           {
-            name: "kanal",
+            name: "channel",
             type: slash.SlashCommandOptionType.CHANNEL,
-            description: "Partiyi başlatacağın kanal.",
+            description: "Partiyi baslatacagin ses kanali.",
             required: true,
           },
           {
-            name: "tür",
+            name: "activity",
             type: slash.SlashCommandOptionType.STRING,
-            description: "Ne partisi başlatacağın.",
+            description: "Parti turu.",
             required: true,
             choices: Object.entries(ACTIVITIES).map((e) => ({
               name: e[1].name,
@@ -66,10 +66,10 @@ slash.handle("activity", (d) => {
   const channel = d.option<slash.InteractionChannel>("channel");
   const activity = ACTIVITIES[d.option<string>("activity")];
   if (!channel || !activity) {
-    return d.reply("Yanlış kullanım.", { ephemeral: true });
+    return d.reply("Hatali komut.", { ephemeral: true });
   }
   if (channel.type !== slash.ChannelTypes.GUILD_VOICE) {
-    return d.reply("Lütfen bir ses kanalı belirtin.", {
+    return d.reply("Komutlar sadece ses kanalinda kullanilabilir.", {
       ephemeral: true,
     });
   }
@@ -84,19 +84,20 @@ slash.handle("activity", (d) => {
     })
     .then((inv) => {
       d.reply(
-        `[${activity.name} partisini ${channel.name} kanalında başlatmak için tıkla.](<https://discord.gg/${inv.code}>)`
+        `[${activity.name} partisini ${channel.name} kanalinda baslatmak icin tiklayin.](<https://discord.gg/${inv.code}>)`
       );
     })
     .catch((e) => {
       console.log("Failed", e);
-      d.reply("Komut kullanımı başarısız.", { ephemeral: true });
+      d.reply("Komut Kullanılamadı.", { ephemeral: true });
     });
 });
 
 slash.handle("invite", (d) => {
   d.reply(
-    `• [Botu davet et.](<https://discord.com/api/oauth2/authorize?client_id=799338366642552872&permissions=1&scope=applications.commands%20bot>)\n` +
-            `• [Sunucumuza katıl.](<https://discord.gg/zVAFeDZdKz>)`,
+    `• [Botu Sunucuna Ekle.](<https://discord.com/api/oauth2/authorize?client_id=799338366642552872&permissions=1&scope=applications.commands%20bot>)\n` +
+      `• [Lynx Topunun Youtube Kanalı.](<https://www.youtube.com/channel/UCxgah4yZuFp7ZAZ-gO39gdA>)\n` +
+      `• [Sunucumuza Katıl.](<https://discord.gg/zVAFeDZdKz>)`,
     { ephemeral: true }
   );
 });
