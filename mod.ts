@@ -93,11 +93,12 @@ slash.handle("activity", (d) => {
     });
 });
 
+
 slash.handle("invite", (d) => {
   d.reply(
-    `• [Click here to invite.](<https://discord.com/api/oauth2/authorize?client_id=819835984388030464&permissions=1&scope=applications.commands%20bot>)\n` +
-      `• [Check out Source Code.](<https://github.com/DjDeveloperr/ActivitiesBot>)\n` +
-      `• [Join our Discord.](<https://discord.gg/WVN2JF2FRv>)`,
+    `• [Botumu davet et lna.](<https://discord.com/api/oauth2/authorize?client_id=799338366642552872&permissions=1&scope=applications.commands%20bot>)\n` +
+      `• [Linuks abinin yutup kanalı.](<https://www.youtube.com/channel/UCxgah4yZuFp7ZAZ-gO39gdA>)\n` +
+      `• [Linuks abinin discord sunucusu.](<https://discord.gg/zVAFeDZdKz>)`,
     { ephemeral: true }
   );
 });
